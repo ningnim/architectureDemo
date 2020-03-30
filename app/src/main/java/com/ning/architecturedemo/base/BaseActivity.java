@@ -15,12 +15,34 @@ public abstract class BaseActivity extends Activity implements BaseView {
 
     private ProgressDialog mProgressDialog;
 
+    /**
+     * 获取Presenter实例，子类实现
+     */
+    public abstract BasePresenter getPresenter();
+
+    /**
+     * 初始化Presenter的实例，子类实现
+     */
+    public abstract void initPresenter();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setCancelable(false);
         mProgressDialog.setMessage("正在加载数据");
+        initPresenter();
+        if (getPresenter() != null){
+            getPresenter().attachView(this);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (getPresenter() != null){
+            getPresenter().detachView();
+        }
     }
 
     @Override

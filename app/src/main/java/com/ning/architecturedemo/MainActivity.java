@@ -9,12 +9,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ning.architecturedemo.base.BaseActivity;
+import com.ning.architecturedemo.base.BasePresenter;
 
 public class MainActivity extends BaseActivity implements MvpView  {
 
     TextView text;
 
-    MvpPresenter presenter;
+    MvpPresenter mvpPresenter = null;
+
+    @Override
+    public BasePresenter getPresenter() {
+        return mvpPresenter;
+    }
+
+    @Override
+    public void initPresenter() {
+        mvpPresenter = new MvpPresenter();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,17 +33,11 @@ public class MainActivity extends BaseActivity implements MvpView  {
         setContentView(R.layout.activity_main);
 
         text = (TextView)findViewById(R.id.text);
-
-        //初始化Presenter
-        presenter = new MvpPresenter();
-        presenter.attachView(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //断开View引用
-        presenter.detachView();
     }
 
     @Override
@@ -49,16 +54,16 @@ public class MainActivity extends BaseActivity implements MvpView  {
 
     // button 点击事件调用方法
     public void getData(View view){
-        presenter.getData("normal");
+        mvpPresenter.getData("normal");
     }
 
     // button 点击事件调用方法
     public void getDataForFailure(View view){
-        presenter.getData("failure");
+        mvpPresenter.getData("failure");
     }
 
     // button 点击事件调用方法
     public void getDataForError(View view){
-        presenter.getData("error");
+        mvpPresenter.getData("error");
     }
 }

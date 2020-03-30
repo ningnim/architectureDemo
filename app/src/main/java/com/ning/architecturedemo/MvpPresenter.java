@@ -3,6 +3,7 @@ package com.ning.architecturedemo;
 import com.ning.architecturedemo.base.BasePresenter;
 import com.ning.architecturedemo.manager.DataModel;
 import com.ning.architecturedemo.manager.Token;
+import com.ning.architecturedemo.model.UserDataModel;
 
 /**
  * Created by chenning on 2020/3/26
@@ -26,7 +27,7 @@ public class MvpPresenter extends BasePresenter<MvpView> {
         getView().showLoading();
 
         // 调用Model请求数据
-        DataModel.request(Token.API_USER_DATA)
+        DataModel.request(UserDataModel.class)
                 .params(params)
                 .execute(new MvpCallback() {
                     @Override

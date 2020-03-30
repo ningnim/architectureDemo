@@ -27,6 +27,10 @@ post请求requestPostAPI(String url, Map params, BaseCallback<T> callback)
 >  model = (BaseModel)Class.forName(token).newInstance();
 3. token类就是根据各个业务填入各个具体业务的model名称即可，提供给DataModel去反射用的
 
+## 进阶
+1. DataModel的反射不需要依赖于Token类管理类，直接传入Class对象
+2. 每个activity都需要手动去链接/断开presenter和view，放在BaseActivity中处理即可
+
 ## 注意
 1. MainActivity extends BaseActivity implements MvpView
 2. 而BaseActivity implements BaseView
