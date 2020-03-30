@@ -1,5 +1,7 @@
 package com.ning.architecturedemo.net;
 
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -42,6 +44,7 @@ public class RetrofitUtil {
                 .build();
         retrofitClient2 = new Retrofit.Builder()
                 .baseUrl("http://fanyi.youdao.com/") // 设置 网络请求 Url
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // 支持RxJava
                 .addConverterFactory(GsonConverterFactory.create()) //设置使用Gson解析(记得加入依赖)
                 .build();
     }

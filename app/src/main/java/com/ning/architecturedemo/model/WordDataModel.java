@@ -11,6 +11,12 @@ import com.ning.architecturedemo.netservice.WordService;
 
 import java.util.Map;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,7 +46,7 @@ public class WordDataModel extends BaseModel<Translation> {
             @Override
             public void onResponse(Call<Translation> call, Response<Translation> response) {
                 // 步骤7：处理返回的数据结果
-                Log.e("chenning", "结果："+response.body().toString());
+                Log.e("chenning", "结果：" + response.body().toString());
                 callback.onSuccess(response.body());
             }
 
@@ -67,7 +73,7 @@ public class WordDataModel extends BaseModel<Translation> {
             @Override
             public void onResponse(Call<Translation1> call, Response<Translation1> response) {
                 // 步骤7：处理返回的数据结果：输出翻译的内容
-                Log.e("chenning", "response:"+response.toString());
+                Log.e("chenning", "response:" + response.toString());
                 callback.onSuccess(response.body());
             }
 
@@ -78,5 +84,37 @@ public class WordDataModel extends BaseModel<Translation> {
                 System.out.println(throwable.getMessage());
             }
         });
+    }
+
+    public void requestPostAPIRxJava(final BaseCallback<Translation1> callback) {
+        // 步骤5:创建 网络请求接口 的实例
+        WordService request = RetrofitUtil.getRetrofitUtil().retrofitClient2.create(WordService.class);
+
+        Observable<Translation1> observable = request.getCallRxJava("I love you");
+
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Translation1>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Translation1 value) {
+                        Log.e("chenning", "response:" + value.toString());
+                        callback.onSuccess(value);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("chenning", "Throwable:" + e.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        callback.onComplete();
+                    }
+                });
     }
 }

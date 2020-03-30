@@ -81,4 +81,8 @@ public class MainActivity extends BaseActivity implements MvpView  {
     public void getWordPost(View view) {
         mvpPresenter.getWordPost();
     }
+
+    public void getWordPostRxJava(View view) {
+        mvpPresenter.getWordPostWithRxJava();
+    }
 }

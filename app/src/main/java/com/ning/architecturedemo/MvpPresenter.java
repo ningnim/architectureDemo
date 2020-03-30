@@ -1,6 +1,7 @@
 package com.ning.architecturedemo;
 
 import com.ning.architecturedemo.base.BaseCallback;
+import com.ning.architecturedemo.base.BaseModel;
 import com.ning.architecturedemo.base.BasePresenter;
 import com.ning.architecturedemo.bean.Translation;
 import com.ning.architecturedemo.bean.Translation1;
@@ -15,6 +16,39 @@ import java.util.HashMap;
  * Created by chenning on 2020/3/26
  */
 public class MvpPresenter extends BasePresenter<MvpView> {
+
+    public void getWordPostWithRxJava(){
+        if (!isViewAttached()){
+            return;
+        }
+        getView().showLoading();
+        WordDataModel wordDataModel = (WordDataModel) DataModel.request(WordDataModel.class);
+        wordDataModel.requestPostAPIRxJava(new BaseCallback<Translation1>() {
+            @Override
+            public void onSuccess(Translation1 data) {
+                if (isViewAttached()){
+                    getView().showData(data);
+                }
+            }
+
+            @Override
+            public void onFailure(String msg) {
+
+            }
+
+            @Override
+            public void onError() {
+
+            }
+
+            @Override
+            public void onComplete() {
+                if (isViewAttached()){
+                    getView().hideLoading();
+                }
+            }
+        });
+    }
 
     public void getWordPost(){
         if (!isViewAttached()) {
