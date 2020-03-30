@@ -1,27 +1,24 @@
-package com.ning.architecturedemo;
+package com.ning.architecturedemo.model;
 
 import android.os.Handler;
 
+import com.ning.architecturedemo.base.BaseCallback;
+import com.ning.architecturedemo.base.BaseModel;
+
 /**
- * Created by chenning on 2020/3/26
+ * Created by chenning on 2020/3/30
  */
-public class MvpModel {
-
-    /**
-     * 获取网络接口数据
-     * @param param 请求参数
-     * @param callback 数据回调接口
-     */
-    public static void getNetData(final String param, final MvpCallback callback){
-
+public class UserDataModel extends BaseModel<String> {
+    @Override
+    public void execute(final BaseCallback<String> callback) {
         // 利用postDelayed方法模拟网络请求数据的耗时操作
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                switch (param){
+                switch (mParams[0]){
 
                     case "normal":
-                        callback.onSuccess("根据参数"+param+"的请求网络数据成功");
+                        callback.onSuccess("根据参数"+mParams[0]+"的请求网络数据成功");
                         break;
 
                     case "failure":
@@ -37,6 +34,4 @@ public class MvpModel {
 
         },2000);
     }
-
 }
-

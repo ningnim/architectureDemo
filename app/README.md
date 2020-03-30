@@ -18,6 +18,14 @@ loading框的展示和消失，getContext()方法；
 也是属于view，跟activity一样，实现BaseView这个接口即可，并且所有的通用方法都
 通过getActivity去实现
 
+## model层的封装
+主要包括BaseModel，DataModel，Token这三个类
+1. 抽取了每个业务model层的基类BaseModel，主要就是请求参数String[] mParams以及三个方法
+execute(BaseCallback<T> callback) 、 get请求requestGetAPI(String url,BaseCallback<T> callback)、和
+post请求requestPostAPI(String url, Map params, BaseCallback<T> callback)
+2. 每个业务presenter层调用model层业务,都通过DataModel这个管理类去做，方便统一管理，使用的是反射方式
+>  model = (BaseModel)Class.forName(token).newInstance();
+3. token类就是根据各个业务填入各个具体业务的model名称即可，提供给DataModel去反射用的
 
 ## 注意
 1. MainActivity extends BaseActivity implements MvpView
