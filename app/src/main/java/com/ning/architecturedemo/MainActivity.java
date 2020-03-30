@@ -54,7 +54,8 @@ public class MainActivity extends BaseActivity implements MvpView  {
 
     // button 点击事件调用方法
     public void getData(View view){
-        mvpPresenter.getData("normal");
+        //mvpPresenter.getData("normal");
+        mvpPresenter.getNetData();
     }
 
     // button 点击事件调用方法

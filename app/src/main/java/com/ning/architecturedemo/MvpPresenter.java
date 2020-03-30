@@ -63,4 +63,40 @@ public class MvpPresenter extends BasePresenter<MvpView> {
                     }
                 });
     }
+
+    public void getNetData(){
+        if (!isViewAttached()) {
+            //如果没有View引用就不加载数据
+            return;
+        }
+        //显示正在加载进度条
+        getView().showLoading();
+        DataModel.request(UserDataModel.class)
+                .requestGetAPI("http://sportsnba.qq.com/", new MvpCallback() {
+                    @Override
+                    public void onSuccess(String data) {
+                        //调用view接口显示数据
+                        if (isViewAttached()) {
+                            getView().showData(data);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String msg) {
+
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        if (isViewAttached()) {
+                            getView().hideLoading();
+                        }
+                    }
+                });
+    }
 }

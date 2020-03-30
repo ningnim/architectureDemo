@@ -24,12 +24,12 @@ public abstract class BaseModel<T>  {
     public abstract void execute(BaseCallback<T> callback);
 
     // 执行Get网络请求，此类看需求由自己选择写与不写
-    protected void requestGetAPI(String url,BaseCallback<T> callback){
+    public void requestGetAPI(String url,BaseCallback<T> callback){
         //这里写具体的网络请求
     }
 
     // 执行Post网络请求，此类看需求由自己选择写与不写
-    protected void requestPostAPI(String url, Map params, BaseCallback<T> callback){
+    public void requestPostAPI(String url, Map params, BaseCallback<T> callback){
         //这里写具体的网络请求
     }
 
