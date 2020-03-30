@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.ning.architecturedemo.base.BaseActivity;
 import com.ning.architecturedemo.base.BasePresenter;
+import com.ning.architecturedemo.bean.Translation;
 
 public class MainActivity extends BaseActivity implements MvpView  {
 
@@ -46,6 +47,11 @@ public class MainActivity extends BaseActivity implements MvpView  {
     }
 
     @Override
+    public void showData(Object data) {
+        text.setText(data.toString());
+    }
+
+    @Override
     public void showErr() {
         super.showErr();
         text.setText("showErr");
@@ -66,5 +72,13 @@ public class MainActivity extends BaseActivity implements MvpView  {
     // button 点击事件调用方法
     public void getDataForError(View view){
         mvpPresenter.getData("error");
+    }
+
+    public void getWordGet(View view) {
+        mvpPresenter.getWordGet();
+    }
+
+    public void getWordPost(View view) {
+        mvpPresenter.getWordPost();
     }
 }

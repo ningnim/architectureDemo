@@ -1,6 +1,7 @@
 package com.ning.architecturedemo;
 
 import com.ning.architecturedemo.base.BaseView;
+import com.ning.architecturedemo.bean.Translation;
 
 /**
  * Created by chenning on 2020/3/26
@@ -11,5 +12,7 @@ public interface MvpView extends BaseView {
      * @param data 数据源
      */
     void showData(String data);
+
+    void showData(Object data);
 
 }

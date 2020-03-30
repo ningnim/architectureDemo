@@ -35,5 +35,17 @@
         android:text="获取数据【异常】"
         android:onClick="getDataForError"
         />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="获取词典get"
+        android:onClick="getWordGet"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="获取词典post"
+        android:onClick="getWordPost"
+        />
 
 </LinearLayout>

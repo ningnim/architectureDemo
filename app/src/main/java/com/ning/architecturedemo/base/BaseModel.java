@@ -27,6 +27,10 @@ public abstract class BaseModel<T>  {
     public void requestGetAPI(String url,BaseCallback<T> callback){
         //这里写具体的网络请求
     }
+    // 执行Get网络请求，此类看需求由自己选择写与不写
+    public void requestGetAPI(Map<String, Object> params,BaseCallback<T> callback){
+        //这里写具体的网络请求
+    }
 
     // 执行Post网络请求，此类看需求由自己选择写与不写
     public void requestPostAPI(String url, Map params, BaseCallback<T> callback){
